@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <noscript>
+        <style>
+            #msg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: #bbb;
+                text-align: center;
+                padding-top: 49vh;
+            }
+        </style>
+    </noscript>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: linen;
+        }
+
+        fieldset {
+            max-width: 600px;
+            width: 90%;
+            margin: 70px auto;
+            background-color: gainsboro;
+        }
+
+        input[type=text] {
+            width: 400px;
+            height: 20px;
+            margin: 10px 0px;
+        }
+
+        select[name="type"] {
+            width: 400px;
+            height: 30px;
+            margin: 10px 0px 30px 50px;
+        }
+
+        #seach {
+            width: 550px;
+            height: 30px;
+            margin: 0px 25px;
+            background-color: lightblue;
+        }
+        .details {
+            width: 80%;
+            height: 30px;
+            margin: auto;
+            background-color: lightblue;
+        }
+        #result {
+            text-align:center;
+            margin-bottom:20px;
+        }
+        .nameOfMovie {
+           font-size:16px;
+           font-weight:600;
+        }
+
+        .block {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 250px);
+            grid-template-areas:
+                "e1 e2 e3"
+                "e4 e5 e6"
+                "e7 e8 e9"
+                ". e10 .";
+            column-gap: 10px;
+            row-gap: 10px;
+        }
+        #elem1{grid-area:e1}
+        #elem2 {grid-area: e2}
+        #elem3 {grid-area: e3}
+        #elem4 {grid-area: e4}
+        #elem5 {grid-area: e5}
+        #elem6 {grid-area: e6}
+        #elem7 {grid-area: e7}
+        #elem8 {grid-area: e8}
+        #elem9 {grid-area: e9}
+        #elem10 {grid-area: e10}
+
+        .elem, .block2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 10px;
+            border:2px dotted lightpink;
+            background-color:lavender;
+        }
+        .imgPoster {
+            justify-self: stretch;
+            height:250px;
+        }
+
+        .num:active{
+            background-color:lightsteelblue;
+        }
+        .block2 {
+            margin-top: 20px;
+            opacity:0.0;
+            height:600px;
+        }
+        .imgPosterDetails {
+            justify-self: stretch;
+            height: 600px;
+        }
+
+        .str {
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="msg">
+        Allow scripts to use this page
+    </div>
+
+    <form action="" onsubmit="return false;">
+        <fieldset>
+            <legend>Поиск фильмов</legend>
+            <div>
+                <label for="title">Название фильма</label>
+                <input type="text" id="title" name="title">
+            </div>
+            <label for="type">Категория</label>
+            <select name="type" id="type">
+                <option>Фильм</option>
+                <option>Сериал</option>
+                <option>Мультфильм</option>
+            </select>
+
+            <div>
+                <button id="seach">Поиск</button>
+            </div>
+        </fieldset>
+
+
+    </form>
+
+    <div id="result"> </div>
+
+    <div class="page" id="page" style="text-align:center"></div>
+
+    <div class="block">
+        <div class="elem" id="elem1">
+            <div class="imgPoster" id="poster1"></div>
+            <div id="text1">
+                <p id="typeOfMovie1" />
+                <p class="nameOfMovie" id="nameOfMovie1" />
+                <p id="yearOfMovie1" />
+                <p style="text-align:center">  <button class="details" value="1" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem2">
+            <div class="imgPoster" id="poster2"></div>
+            <div id="text2">
+                <p id="typeOfMovie2" />
+                <p class="nameOfMovie" id="nameOfMovie2" />
+                <p id="yearOfMovie2" />
+                <p style="text-align:center">  <button class="details" value="2" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem3">
+            <div class="imgPoster" id="poster3"></div>
+            <div id="text3">
+                <p id="typeOfMovie3" />
+                <p class="nameOfMovie" id="nameOfMovie3" />
+                <p id="yearOfMovie3" />
+                <p style="text-align:center">  <button class="details" value="3" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem4">
+            <div class="imgPoster" id="poster4"></div>
+            <div id="text4">
+                <p id="typeOfMovie4" />
+                <p class="nameOfMovie" id="nameOfMovie4" />
+                <p id="yearOfMovie4" />
+                <p style="text-align:center">  <button class="details" value="4" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem5">
+            <div class="imgPoster" id="poster5"></div>
+            <div id="text6">
+                <p id="typeOfMovie5" />
+                <p class="nameOfMovie" id="nameOfMovie5" />
+                <p id="yearOfMovie5" />
+                <p style="text-align:center">  <button class="details" value="5" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem6">
+            <div class="imgPoster" id="poster6"></div>
+            <div id="text6">
+                <p id="typeOfMovie6" />
+                <p class="nameOfMovie" id="nameOfMovie6" />
+                <p id="yearOfMovie6" />
+                <p style="text-align:center">  <button class="details" value="6" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem7">
+            <div class="imgPoster" id="poster7"></div>
+            <div id="text7">
+                <p id="typeOfMovie7" />
+                <p class="nameOfMovie" id="nameOfMovie7" />
+                <p id="yearOfMovie7" />
+                <p style="text-align:center">  <button class="details" value="7" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem8">
+            <div class="imgPoster" id="poster8"></div>
+            <div id="text8">
+                <p id="typeOfMovie8" />
+                <p class="nameOfMovie" id="nameOfMovie8" />
+                <p id="yearOfMovie8" />
+                <p style="text-align:center">  <button class="details" value="8" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+        <div class="elem" id="elem9">
+            <div class="imgPoster" id="poster9"></div>
+            <div id="text9">
+                <p id="typeOfMovie9" />
+                <p class="nameOfMovie" id="nameOfMovie9" />
+                <p id="yearOfMovie9" />
+                <p style="text-align:center">  <button class="details" value="9" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+
+        <div class="elem" id="elem10">
+            <div class="imgPoster" id="poster10"></div>
+            <div id="text10">
+                <p id="typeOfMovie10" />
+                <p class="nameOfMovie" id="nameOfMovie10" />
+                <p id="yearOfMovie10" />
+                <p style="text-align:center">  <button class="details" value="10" onclick="getDetails(rezArray,this)">Подробнее</button> </p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="block2" >
+        <div class="imgPosterDetails" id="posterDetails"></div>
+        <div id="textDetails">
+            <div>
+                <p class="str">Тип: </p>
+                <p class="str" id="typeOfMovieDetails"></p>
+            </div>
+
+            <div>
+                <p class="str">Название: </p>
+                <p class="nameOfMovie str" id="nameOfMovieDetails" />
+            </div>
+            <div>
+                <p class="str">Альтернативное название: </p>
+                <p class="str"id="AlternameOfMovieDetails" />
+            </div>
+            <div>
+                <p class="str">Год: </p>
+                <p class="str"id="yearOfMovieDetails" />
+            </div>
+            <div>
+                <p class="str">Рейтинг Imdb: </p>
+                <p class="str"id="ratingOfMovieDetailsImdb" />
+            </div>
+            <div>
+                <p class="str">Рейтинг Кинопоиск: </p>
+                <p class="str"id="ratingOfMovieDetailsKp" />
+            </div>
+            <div>
+                <p>Описание: </p>
+                <p id="descriptionOfMovieDetails" />
+            </div>
+
+
+
+            
+           
+
+
+        </div>
+    </div>
+    <script>
+
+        "use strict";
+        msg.innerHTML = "";
+
+        let h = 1;
+        while (h < 11) {
+            document.querySelector(`#elem${h}`).style.opacity = 0.0;
+            h++;
+        }
+
+        let rezArray=[];
+
+        function getValueStr() {
+            let elem = document.getElementById('title');
+            return elem.value;
+        }
+
+        function getValueSelect() {
+
+            let s = "";
+            switch (document.querySelector('select').selectedIndex.toString()) {
+                case '0': s = "movie"; break;
+                case '1': s = "tv-series"; break;
+                case '2': s = "cartoon"; break;
+
+            }
+            return s;
+
+        }
+
+        function urlForKinopoisk() {
+
+            let url = new URL("https://api.kinopoisk.dev/movie");
+            url.searchParams.append('token', 'DDSRVA2-F54MD56-GTNPTPR-KHDM13P');
+            url.searchParams.append('isStrict', 'false');
+            url.searchParams.append('field', 'name');
+            url.searchParams.append('search', getValueStr());
+            url.searchParams.append('field', 'type');
+            url.searchParams.append('search', getValueSelect());
+            url.searchParams.append('page', '1');
+            return url;
+        }
+
+        function clearElem(i) {
+
+            let h = i + 1;
+            while (h < 11) {
+                document.querySelector(`#elem${h}`).style.opacity = 0.0;
+                document.querySelector(`#poster${h}`).innerHTML = " ";
+                document.querySelector(`#typeOfMovie${h}`).innerHTML = " ";
+                document.querySelector(`#nameOfMovie${h}`).innerHTML = " ";
+                document.querySelector(`#yearOfMovie${h}`).innerHTML = " ";
+                h++;
+            }
+
+        }
+
+        function getTextButton(btn) {
+
+            const xhr = new XMLHttpRequest();
+
+                let url = urlForKinopoisk();
+                url.searchParams.set('page', btn.value);
+
+                xhr.open("GET", url, true);
+                xhr.send();
+
+                xhr.onload = function () {
+
+                    let a = JSON.parse(this.response);
+                    rezArray = a;
+                    
+                    let arrKeys = Object.keys(a);
+                    let docs = arrKeys[0];
+                    let arrValues = Object.values(a);
+                    let totalValues = arrValues[1];
+
+                    for (let i in a.docs) { addRez(i, a); }
+
+                    if (a.docs.length < 10) clearElem(a.docs.length);
+
+
+                };
+                xhr.onerror = function () {
+                    alert(`Ошибка соединения`);
+                };
+                xhr.onprogress = function (event) {
+                    //alert(`Загружено ${event.loaded} из ${event.total}`);
+
+                };
+
+        }
+
+        function getDetails(rezArray,btn) {
+
+            document.querySelector('.block2').style.opacity = 1.0;
+            document.querySelector(`#posterDetails`).innerHTML = `<img src ='${rezArray.docs[btn.value-1].poster.url}'   width=95%; height=100%; >`;
+            document.querySelector(`#typeOfMovieDetails`).innerHTML = rezArray.docs[btn.value-1].type;
+            document.querySelector(`#nameOfMovieDetails`).innerHTML = rezArray.docs[btn.value - 1].name;
+            document.querySelector(`#AlternameOfMovieDetails`).innerHTML = rezArray.docs[btn.value - 1].alternativeName;
+            document.querySelector(`#yearOfMovieDetails`).innerHTML = rezArray.docs[btn.value - 1].year;
+            document.querySelector(`#ratingOfMovieDetailsImdb`).innerHTML = rezArray.docs[btn.value - 1].rating.imdb;
+            document.querySelector(`#ratingOfMovieDetailsKp`).innerHTML = rezArray.docs[btn.value - 1].rating.kp;
+            document.querySelector(`#descriptionOfMovieDetails`).innerHTML = rezArray.docs[btn.value - 1].description;
+        }
+        
+
+
+        function addRez(i, a) {
+
+             document.querySelector(`#elem${(parseInt(i) + 1)}`).style.opacity = 1.0;
+             document.querySelector(`#poster${(parseInt(i) + 1)}`).innerHTML = `<img src ='${a.docs[i].poster.url}'   width=95%; height=100%; >`;
+             document.querySelector(`#typeOfMovie${(parseInt(i) + 1)}`).innerHTML = a.docs[i].type;
+             document.querySelector(`#nameOfMovie${(parseInt(i) + 1)}`).innerHTML = a.docs[i].name;
+             document.querySelector(`#yearOfMovie${(parseInt(i) + 1)}`).innerHTML = a.docs[i].year;
+          
+        }
+        function addButton(countPage) {
+            let str = "";
+            let tmpButtom = 1;
+            while (tmpButtom < countPage + 1) {
+                str += `<button class="num" id="num" value="${tmpButtom}" onclick="getTextButton(this)">` + tmpButtom + "</button> ";
+                tmpButtom++;
+            }
+            return str;
+        }
+
+        document.querySelector("button").addEventListener("click", () => {
+
+            document.querySelector("#result").innerHTML = " ";
+            document.querySelector("#page").innerHTML = " ";
+          
+            const xhr = new XMLHttpRequest();
+
+            let url=urlForKinopoisk();
+
+            xhr.open("GET", url, true);
+            xhr.send();
+
+            xhr.onload = function () {
+
+                let a = JSON.parse(this.response);
+                rezArray = a;
+               
+                let arrKeys = Object.keys(a);
+                let docs = arrKeys[0];
+
+                let arrValues = Object.values(a);
+                let totalValues = arrValues[1];
+                let countPage = arrValues[4]; 
+
+                 if (totalValues == 0) { document.querySelector("#result").innerHTML = "По запросу ничего не найдено. Попробуйте изменить категорию"; }
+                 else {
+
+                      document.querySelector("#result").innerHTML = "Найдено " + totalValues + " позиций";
+                      document.querySelector(".page").innerHTML += addButton(countPage);
+
+                     for (let i in a.docs) { addRez(i, a); }
+
+                     if (a.docs.length < 10) clearElem(a.docs.length);
+                 }
+                return a;
+             
+            };
+            xhr.onerror = function () {
+                alert(`Ошибка соединения`);
+            };
+            xhr.onprogress = function (event) {
+                //alert(`Загружено ${event.loaded} из ${event.total}`);
+
+            };
+
+
+
+
+
+        })
+
+      
+           
+    </script>
+</body>
+</html>
+
+
+
+
